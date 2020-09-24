@@ -3,9 +3,7 @@ import Message from './Message';
 import Progress from './Progress';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'
-import { CsvToHtmlTable } from 'react-csv-to-table';
 import axios from 'axios';
-import xlsx from 'node-xlsx';
 import './FileUpload.css';;
 
 const useStyles = makeStyles((theme) => ({
@@ -101,26 +99,6 @@ const FileUpload = (props) => {
         <Progress percentage={uploadPercentage} />
       </div>
       {message ? <Message msg={message} /> : null}
-
-      {uploadedFile ? renderTable = () => {
-        let obj = xlsx.parse(uploadedFile.filePath);
-        var rows = [];
-        var writeStr = "";
-        for(var i = 0; i < obj.length; i++) {
-          var sheet = obj[i];
-          for(var j = 0; j < sheet['data'].length; j++)
-            rows.push(sheet['data'][j]);
-        }
-        for(var i = 0; i < rows.length; i++)
-          writeStr += rows[i].join(",") + "\n";
-        return (
-          <CsvToHtmlTable
-            data={writeStr}
-            csvDelimiter=","
-            tableClassName="table table-striped table-hover"
-          />
-        )
-      } : null}
     </Fragment>
     
   );
@@ -128,20 +106,3 @@ const FileUpload = (props) => {
 
 
 export default FileUpload;
-
-
-/*
-Develop an activity diagram based on the following narrative.  The purpose of the Open Access
-Insurance System is to provide automotive insurance to car owners.  Initially, prospective customers
-fill out an insurance application, which provides information about the customer and his or her vehicles.
-This information is sent to an agent, who sends it to various insurance companies to get quotes for
-insurance.  When the responses return, the agent then determines the best policy for the type and
- level of coverage desired and gives the customer a copy of the insurance policy proposal and quote.  
-*/
-
-
-/*
-
-
-
-*/
